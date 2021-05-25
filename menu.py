@@ -1,7 +1,7 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QDesktopWidget, QWidget
 
-class App(QMainWindow):
+class App(QMainWindow, QWidget):
     def __init__(self):
         super().__init__()
         self.title = 'Football quiz'
@@ -18,7 +18,14 @@ class App(QMainWindow):
         button.move(100, 70)
         button = QPushButton('Football questions',self)
         button.move(100, 100)
+        self.center()
         self.show()
+
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
